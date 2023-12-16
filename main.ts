@@ -1,0 +1,15 @@
+input.onButtonPressed(Button.B, function () {
+    datalogger.deleteLog(datalogger.DeleteType.Full)
+    basic.showIcon(IconNames.Yes)
+    basic.pause(5000)
+    basic.clearScreen()
+})
+basic.showIcon(IconNames.Duck)
+serial.redirectToUSB()
+serial.setBaudRate(BaudRate.BaudRate115200)
+serial.writeString("Let's start sending serial data")
+basic.pause(5000)
+basic.clearScreen()
+loops.everyInterval(1000, function () {
+    serial.writeValue("", input.acceleration(Dimension.X))
+})
